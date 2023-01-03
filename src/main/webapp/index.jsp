@@ -13,7 +13,7 @@
 <link href="css/main.css" rel="stylesheet">
 <link href="css/responsive.css" rel="stylesheet">
 <script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrapindex.html.min.js"></script>
 <script src="js/jquery.scrollUp.min.js"></script>
 <script src="js/price-range.js"></script>
 <script src="js/jquery.prettyPhoto.js"></script>

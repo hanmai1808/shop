@@ -1,20 +1,20 @@
 package model;
 
-public class SanPham {
+public class SanPham implements Comparable<SanPham>{
 	private String ma_san_pham;
 	private DanhMuc danh_muc;
 	private String ten_san_pham;
 	private String hinh_anh;
 	private int so_luong;
 	private String mo_ta;
-	private String don_gia;
-	private String giam_gia;
+	private double don_gia;
+	private int giam_gia;
 	public SanPham() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public SanPham(String ma_san_pham, DanhMuc danh_muc, String ten_san_pham, String hinh_anh, int so_luong,
-			String mo_ta, String don_gia, String giam_gia) {
+			String mo_ta, double don_gia, int giam_gia) {
 		super();
 		this.ma_san_pham = ma_san_pham;
 		this.danh_muc = danh_muc;
@@ -61,17 +61,22 @@ public class SanPham {
 	public void setMo_ta(String mo_ta) {
 		this.mo_ta = mo_ta;
 	}
-	public String getDon_gia() {
+	public double getDon_gia() {
 		return don_gia;
 	}
-	public void setDon_gia(String don_gia) {
+	public void setDon_gia(double don_gia) {
 		this.don_gia = don_gia;
 	}
-	public String getGiam_gia() {
+	public int getGiam_gia() {
 		return giam_gia;
 	}
-	public void setGiam_gia(String giam_gia) {
+	public void setGiam_gia(int giam_gia) {
 		this.giam_gia = giam_gia;
+	}
+	@Override
+	public int compareTo(SanPham sp) {
+		// TODO Auto-generated method stub
+		return Integer.parseInt(this.ma_san_pham) - Integer.parseInt(sp.ma_san_pham);
 	}
 	
 

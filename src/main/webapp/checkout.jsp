@@ -1,7 +1,9 @@
 <%@page import="java.util.Map"%>
-<%@page import="model.GioHang"%>
 <%@page import="model.SanPham"%>
 <%@page import="java.util.TreeMap"%>
+<%@page import="model.GioHang"%>
+<%@page import="org.apache.catalina.connector.Response"%>
+<%@page import="org.apache.catalina.ssi.ResponseIncludeWrapper"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,31 +19,31 @@
 <link href="css/main.css" rel="stylesheet">
 <link href="css/responsive.css" rel="stylesheet">
 <script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrapindex.html.min.js"></script>
 <script src="js/jquery.scrollUp.min.js"></script>
 <script src="js/price-range.js"></script>
 <script src="js/jquery.prettyPhoto.js"></script>
 <script src="js/main.js"></script>
-<%
-GioHang cart = (GioHang) session.getAttribute("cart");
-if(cart==null){
-	cart=new GioHang();
-	session.setAttribute("cart", cart);
-}
-TreeMap<SanPham, Integer> list = cart.getList();
-
-	%>
 </head>
 <body>
+<%
+if(session.getAttribute("username")==null){
+	response.sendRedirect("account.jsp");
+}else{
+	GioHang cart = (GioHang) session.getAttribute("cart");
+	if(cart==null){
+		cart=new GioHang();
+		session.setAttribute("cart", cart);
+	}
+	TreeMap<SanPham, Integer> list = cart.getList();
+%>
 	<jsp:include page="header.jsp"></jsp:include>
-		<section id="cart_items">
+	<section id="cart_items">
 		<div class="container">
-			<div class="breadcrumbs">
-				<ol class="breadcrumb">
-				  <li><a href="#">Home</a></li>
-				  <li class="active">Shopping Cart</li>
-				</ol>
+		<div class="review-payment">
+				<h2>Review & Payment</h2>
 			</div>
+
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
@@ -55,7 +57,7 @@ TreeMap<SanPham, Integer> list = cart.getList();
 						</tr>
 					</thead>
 					<tbody>
-					<%
+						<%
 					for(Map.Entry<SanPham,Integer> ds:list.entrySet()){
 					%>
 						<tr>
@@ -87,85 +89,44 @@ TreeMap<SanPham, Integer> list = cart.getList();
 					</tbody>
 				</table>
 			</div>
+			<div class="payment-options">
+					<span>
+						<label><input type="checkbox"> Direct Bank Transfer</label>
+					</span>
+					<span>
+						<label><input type="checkbox"> Check Payment</label>
+					</span>
+					<span>
+						<label><input type="checkbox"> Paypal</label>
+					</span>
+				</div>
+			<div class="shopper-informations">
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="shopper-info">
+							<p>Thong tin thanh toan</p>
+							<form action="ThanhToanServlet" method="post">
+								<p>dia chi giao hang</p>
+								<textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="5"></textarea>
+								<input type="text">
+								<select>
+										<option>Thanh Toan</option>
+										<option value="Thanh Toan Khi Giao Hang" >Thanh Toan Khi Giao Hang</option>
+										<option value ="Chuyen Khoan Ngan Hang">Chuyen Khoan Ngan Hang</option>
+
+								</select>
+								<input type="hidden" value="<%=session.getAttribute("username") %>"/>
+								<input type="submit" value="xac_nhan_thanh_toan" class="btn btn-primary">
+							</form>
+						</div>
+					</div>
+				
 		</div>
 	</section> <!--/#cart_items-->
 
-	<section id="do_action">
-		<div class="container">
-			<div class="heading">
-				<h3>What would you like to do next?</h3>
-				<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
-			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="chose_area">
-						<ul class="user_option">
-							<li>
-								<input type="checkbox">
-								<label>Use Coupon Code</label>
-							</li>
-							<li>
-								<input type="checkbox">
-								<label>Use Gift Voucher</label>
-							</li>
-							<li>
-								<input type="checkbox">
-								<label>Estimate Shipping & Taxes</label>
-							</li>
-						</ul>
-						<ul class="user_info">
-							<li class="single_field">
-								<label>Country:</label>
-								<select>
-									<option>United States</option>
-									<option>Bangladesh</option>
-									<option>UK</option>
-									<option>India</option>
-									<option>Pakistan</option>
-									<option>Ucrane</option>
-									<option>Canada</option>
-									<option>Dubai</option>
-								</select>
-								
-							</li>
-							<li class="single_field">
-								<label>Region / State:</label>
-								<select>
-									<option>Select</option>
-									<option>Dhaka</option>
-									<option>London</option>
-									<option>Dillih</option>
-									<option>Lahore</option>
-									<option>Alaska</option>
-									<option>Canada</option>
-									<option>Dubai</option>
-								</select>
-							
-							</li>
-							<li class="single_field zip-field">
-								<label>Zip Code:</label>
-								<input type="text">
-							</li>
-						</ul>
-						<a class="btn btn-default update" href="">Get Quotes</a>
-						<a class="btn btn-default check_out" href="">Continue</a>
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div class="total_area">
-						<ul>
-							<li>Cart Sub Total <span>$59</span></li>
-							<li>Eco Tax <span>$2</span></li>
-							<li>Shipping Cost <span>Free</span></li>
-							<li>Total <span>$61</span></li>
-						</ul>
-							<a class="btn btn-default update" href="">Update</a>
-							<a class="btn btn-default check_out" href="checkout.jsp">Check Out</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section><!--/#do_action-->
+	
 	<jsp:include page="footer.jsp"></jsp:include>
-</body>
+	<%} %>
+	</body>
+	
 </html>

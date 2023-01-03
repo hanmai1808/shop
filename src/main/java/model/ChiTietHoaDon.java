@@ -1,17 +1,18 @@
 package model;
 
 public class ChiTietHoaDon {
-	private String ma_chi_tiet_hoa_don;
+	private int ma_chi_tiet_hoa_don;
 	private HoaDon hoa_don;
 	private SanPham san_pham;
 	private int so_luong;
 	private double don_gia;
 	private int giam_gia;
+	
 	public ChiTietHoaDon() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ChiTietHoaDon(String ma_chi_tiet_hoa_don, HoaDon hoa_don, SanPham san_pham, int so_luong, double don_gia,
+	public ChiTietHoaDon(int ma_chi_tiet_hoa_don, HoaDon hoa_don, SanPham san_pham, int so_luong, double don_gia,
 			int giam_gia) {
 		super();
 		this.ma_chi_tiet_hoa_don = ma_chi_tiet_hoa_don;
@@ -21,10 +22,10 @@ public class ChiTietHoaDon {
 		this.don_gia = don_gia;
 		this.giam_gia = giam_gia;
 	}
-	public String getMa_chi_tiet_hoa_don() {
+	public int getMa_chi_tiet_hoa_don() {
 		return ma_chi_tiet_hoa_don;
 	}
-	public void setMa_chi_tiet_hoa_don(String ma_chi_tiet_hoa_don) {
+	public void setMa_chi_tiet_hoa_don(int ma_chi_tiet_hoa_don) {
 		this.ma_chi_tiet_hoa_don = ma_chi_tiet_hoa_don;
 	}
 	public HoaDon getHoa_don() {

@@ -45,7 +45,7 @@ public class DanhMucDAOImpl implements DanhMucDAO {
 	@Override
 	public ArrayList<DanhMuc> getListDanhMucCon(String ma_danh_muc) {
 		Connection connection=DBConnect.getConnection();
-		String sql="select * from danh_muc where danh_muc_cha ='10001';";
+		String sql="select * from danh_muc where danh_muc_cha = '"+ma_danh_muc+"'";
 		ArrayList<DanhMuc> arr= new ArrayList<>();
 		
 		try {
