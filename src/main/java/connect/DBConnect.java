@@ -8,8 +8,7 @@ public class DBConnect {
 		Connection cons = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			cons = DriverManager.getConnection("jdbc:mysql://localhost:3306/shopping?useSSL=false","han","123");
-			System.out.println("ok");
+			cons = DriverManager.getConnection("jdbc:mysql://localhost:3306/shopping?userLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false","han","123");
 			//userLegacyDatetimeCode=false&serverTimezone=UTC&
 		} catch (Exception e) {
 			e.printStackTrace();
